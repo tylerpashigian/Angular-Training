@@ -17,9 +17,9 @@
               Manage Recipe <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#" (click)="addIngredientsToList(recipe.ingredients)">Add Ingredients to List</a></li>
-                <li><a href="#">Edit Recipe</a></li>
-                <li><a href="#">Delete Recipe</a></li>
+                <li><a (click)="addIngredientsToList(recipe.ingredients)">Add Ingredients to List</a></li>
+                <li><a (click)="editRecipe()">Edit Recipe</a></li>
+                <li><a>Delete Recipe</a></li>
             </ul>
         </div>
     </div>

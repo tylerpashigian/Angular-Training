@@ -34,4 +34,8 @@ export class RecipeService {
     return this.recipeList.slice();
   }
 
+  getRecipe(index: number) {
+    return this.recipeList[index];
+  }
+
 }
