@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -14,6 +14,8 @@ import { DropdownDirective } from './directives/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './components/RecipeBook/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './components/RecipeBook/recipe-edit/recipe-edit.component';
+import { ErrorHandlingService } from './services/error-handling/error-handling.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,13 @@ import { RecipeEditComponent } from './components/RecipeBook/recipe-edit/recipe-
   imports: [
     AppRoutingModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // {provide: ErrorHandler, useClass: ErrorHandlingService},
+    // {provide: HTTP_INTERCEPTORS, useClass: ErrorHandlingService,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
