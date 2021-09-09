@@ -8,6 +8,7 @@ import { IngredientModel } from 'src/app/models/IngredientModel';
 export class ShoppingListService {
 
   ingredientsChanged = new Subject<IngredientModel[]>();
+  startedEditing = new Subject<number>()
 
   private ingredients: IngredientModel[] = [
     new IngredientModel("Chicken", 10),
@@ -16,6 +17,10 @@ export class ShoppingListService {
 
   constructor() { }
 
+  getIngredient(index: number): IngredientModel {
+    return this.ingredients[index];
+  }
+
   getIngredients() {
     return this.ingredients.slice();
   }
@@ -23,6 +28,16 @@ export class ShoppingListService {
   addIngredient(ingredient: IngredientModel) {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.next(this.ingredients.slice())
+  }
+
+  updateIngredient(index: number, ingredient: IngredientModel) {
+    this.ingredients[index] = ingredient;
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.ingredientsChanged.next(this.ingredients.slice());
   }
 
 }
