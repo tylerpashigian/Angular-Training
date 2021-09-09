@@ -8,10 +8,9 @@ import { ShoppingListService } from 'src/app/services/shopping-list/shopping-lis
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css']
+  styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
-
   recipe: RecipeModel;
   id: number;
 
@@ -19,23 +18,29 @@ export class RecipeDetailComponent implements OnInit {
     private listService: ShoppingListService,
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.recipe = this.recipeService.getRecipe(this.id);
-    })
+    });
   }
 
   addIngredientsToList(ingredients: IngredientModel[]) {
     ingredients.forEach((ingredient) => {
       this.listService.addIngredient(ingredient);
-    })
+    });
   }
 
   editRecipe() {
-    this.router.navigate(['edit'], {relativeTo: this.route})
+    this.router.navigate(['edit'], { relativeTo: this.route });
   }
 
+  deleteRecipe() {
+    this.recipeService.deleteRecipe(this.id).then(() => {
+      this.router.navigate([''], { relativeTo: this.route });
+    });
+  }
 }
